@@ -11,6 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "ejs": "^2.6.1",
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "express-ejs-layouts": "^2.5.0",
+    "mongoose": "^5.4.6"
   }
 }
