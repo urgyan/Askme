@@ -1,8 +1,40 @@
-<h1>Sign In</h1>
+<link rel="stylesheet" href="/css/signin.css">
 
-<form action="/users/create-session" method="POST">
-    <input type="email" name="email" placeholder="Email"  required>
-    <input type="password" name="password" placeholder="Password"  required>
-    <input type="submit" value="Sign In">
 
-</form>
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="column" id="main">
+            <h1>Sign in </h1>
+            <h3>Welcome to ASKME</h3>
+            <form action="/user/create-session" method="post">
+        
+              <div class="form-group">
+             
+                <input type="email" name="email" class="form-control"  aria-describedby="emailHelp" placeholder="E-mail" required>
+              </div>
+              <div class="form-group">
+                <input type="password" name="password" class="form-control" placeholder="Password" required>
+              </div>
+
+              
+              <button type="submit" class="btn btn-primary">Sign In</button>
+              <button type="button" class="btn btn-primary"> <a href="/user/reset-password">Reset/Forget-Password</a> </button>
+
+            </form>
+          </div>
+         
+          
+          <div class="column" id="secondary">
+            <div class="sec-content">
+              <h2>Welcome Back!</h2>
+              <h3>ASKME is always here to serve you!!</h3>
+              <a href="/">
+
+                <button type="button" class="btn btn-primary">Home</button>
+                <button type="button" class="btn btn-primary"> <a href="/user/auth/google">Google SignIn/SIgnUp</a> </button>
+              </a>
+              
+            </div>
+          </div>
+        </div>
+      </div>
