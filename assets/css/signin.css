@@ -46,9 +46,11 @@
     }
     
     #secondary {
-    background-color: #F9BC35;
+    background-color: #b92b27;
     border-radius: 0 4rem 4rem 0;
     text-align: center;
+    color: white;
+ 
     }
     
     #main .form-control {
@@ -70,13 +72,15 @@
     .btn-primary {
     border-color: rgba( 255, 255, 255, 0);
     margin-top: 30px;
-    background: #fcc309; /* Old browsers */
+    background-color: #b92b27;
+    color: white; 
    
   
     }
     .btn-primary a {
 
         text-decoration: none;
+        color: white;
     }
     .btn-primary:hover {
     border-color: rgba( 255, 255, 255, 0);
@@ -87,8 +91,8 @@
     
     }
     #secondary .btn-primary {
-    background: #f8f9fa4f;
-    color: #000;
+        background: #00010359;
+        color: white;
     }
     .modal-body label {
     margin-bottom: 0;

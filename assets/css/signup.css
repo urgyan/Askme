@@ -49,7 +49,7 @@
     }
     
     #secondary {
-    background-color: #F9BC35;
+    background-color:#b92b27;
     border-radius: 0 4rem 4rem 0;
     text-align: center;
     }
@@ -72,10 +72,14 @@
     
     .btn-primary {
     border-color: rgba( 255, 255, 255, 0);
-    background: #f1da36; /* Old browsers */
-    background: -moz-linear-gradient(left, #f1da36 0%, #fca86c 99%); /* FF3.6-15 */
+    background:#b92b27; 
  
     }
+    .btn-primary a {
+        text-decoration: none;
+        color: white;
+     
+        }
     
     .btn-primary:hover {
     border-color: rgba( 255, 255, 255, 0);
@@ -84,10 +88,11 @@
     
     #main .btn-primary {
     width: 100%;
+    color: white;
     }
     #secondary .btn-primary {
-    background: #f8f9fa4f;
-    color: #000;
+    background: #0700034f;
+    color: rgb(255, 255, 255);
     }
     .modal-body label {
     margin-bottom: 0;
@@ -95,6 +100,7 @@
     
     .sec-content {
     margin-top: 85%;
+    color: white;
     }
     
     input{
