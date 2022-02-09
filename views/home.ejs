@@ -1,34 +1,71 @@
-<link rel="stylesheet" href="/css/home.css">
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+<link rel="stylesheet" href="'css/home.css">
+<link rel="stylesheet" href="css/post.css">
+<link rel="stylesheet" href="css/comment.css">
+
 
 <div id="home-container">
-    <section id="feed-posts">
-            <h4>Posts</h4>
-            <% if(locals.user){ %>
-            <form action="/posts/create" id="new-post-form" method="POST">
-                <textarea name="content" cols="30" rows="3" placeholder="Type Here..." required></textarea>
-                <input type="submit" value="Post">
-            </form>
-            <% } %>
-        
-            <div id="posts-list-container">
-                <ul>
-                    <% for(post of posts){ %>
-                        
-                    <%- include('_post') -%>
-                        
-                    <%} %>
-                </ul>
-            </div>
-        </section>
-        
-        
-        <section id="user-friends">
-            <h4>Friends</h4>
-            <% for(u of all_users){%>
-                <p>
-                    <a href="/users/profile/<%= u.id %>"><%= u.name %></a>
-                </p>
-            <% } %>
-        </section>
+
+    <section  id="feed-posts">
+        <h4>Posts</h4>
+    
+        <% if(locals.user){%>
+    
+        <form action="/post/create" method="post" id="new-post-form">
+    
+            <textarea id="post-form" name="content" cols="30" rows="3" placeholder="Type here... " required></textarea>
+            <input type="submit" value="Post">
+        </form>
+        <%}%>
+        <div id="post-list-container">
+            <ul>
+                <%for(post of posts){ %>
+                    <%-include('_post')-%>
+                <%}%>
+            </ul>
+        </div>
+    </section>
+    
+    
+    <section id="friend-list">
+        <h1>Friends</h1>
+        <ul id="all-friends">
+
+
+        </ul>
+
+        <h1>All User</h1>
+
+        <ul id="all-user">
+            <%for(u of all_users){%>
+                <li>
+                    <a href="/user/profile/<%= u.id %>">
+                        <%= u.name%>
+                    </a>
+                </li>
+            <%}%>
+        </ul>
+    </section>
+
+
+    
 </div>
+
+
+<script src="js/comment.js"></script>
+
+
+<script src=" 'js/home_post.js"></script>
+
+
+
+<script src=" 'js/toggle_like.js"></script>
+
+
+
+
+
+
+
+
 

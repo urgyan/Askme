@@ -1,15 +1,40 @@
 #home-container{
-    display: flex;
-    
+    display:flex;
     #feed-posts{
-        width: 70%;
+        width: 40%;
         padding: 10px;
+        margin-left: 25%;
+        height: 112vh;
+        padding: 10px;
+        margin-left: 25%;
+        overflow-y: overlay;
+    
+      
     }
 
-    #user-friends{
+    ul{
+        list-style-type: none;
+        
+    }
+    
+   
+
+    //All user of ask me 
+    #all-user{
         width: 30%;
         padding: 10px;
-        border-left: 1px solid lightgrey;
-        height: 100%;
+        height: inherit;
+        
+
+        li{
+            
+            font-size:20px;
+            text-align:left;
+            margin-top: 10px;
+            a{
+                color: white;
+                text-decoration: none;
+            }
+        }
     }
 }

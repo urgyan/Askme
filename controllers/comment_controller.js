@@ -5,7 +5,9 @@ const Comment = require('../models/comment');
 module.exports.create = async function(req, res){
 
     try{
+   
         let post = await Post.findById(req.body.post);
+
 
         if (post){
             let comment = await Comment.create({
@@ -16,6 +18,21 @@ module.exports.create = async function(req, res){
 
             post.comments.push(comment);
             post.save();
+            await comment.populate('user', 'name email avatar')
+           
+
+            if (req.xhr){
+                
+                
+                return res.status(200).json({
+                    data: {
+                        comment: comment
+                    },
+                    message: "Post created!"
+                });
+            }
+
+
             req.flash('success', 'Comment published!');
 
             res.redirect('/');
@@ -28,28 +45,39 @@ module.exports.create = async function(req, res){
 }
 
 
-module.exports.destroy = async function(req, res){
+
+//Deletion of comment 
+module.exports.destroy = async function(req,res){
 
     try{
-        let comment = await Comment.findById(req.params.id);
-
-        if (comment.user == req.user.id){
-
+        let comment =await Comment.findById(req.params.id );
+        let user = await User.findById(req.user.id);
+    
+        if(comment.user == req.user.id || user.id == req.user.id){
             let postId = comment.post;
-
-            comment.remove();
-
-            let post = Post.findByIdAndUpdate(postId, { $pull: {comments: req.params.id}});
-            req.flash('success', 'Comment deleted!');
-
-            return res.redirect('back');
-        }else{
-            req.flash('error', 'Unauthorized');
-            return res.redirect('back');
+            comment.remove()
+            let post = await Post.findByIdAndUpdate(postId,{$pull:{comments: req.params.id}});
+            
+           
         }
+
+        if(req.xhr){
+            return res.status(200).json({
+                data:{
+                    comment_id:req.params.id
+                },
+                message:"Yeah am deleting the comment",
+                name:req.user.name
+            })
+        }
+
+        req.flash('success','Comment is deleted');
+        return res.redirect('back');
+
     }catch(err){
-        req.flash('error', err);
-        return;
+        req.flash('error','You are not authorized!!');
+        return res.redirect('back');
     }
+
     
 }
