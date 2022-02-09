@@ -1,7 +1,35 @@
-<link rel="stylesheet" href="/css/user_profile.css">
-<h1>
-    Codeial / Profile Page
-</h1>
 
-<p><%= user.name %></p>
-<p><%= user.email %></p>
+<link rel="stylesheet" href="/css/profile.css">
+<div class="container">
+    <div class="avatar-flip">
+        <img src="<%= user_profile.avatar%>"  alt="user.name" height="150" width="150">
+    </div>
+
+
+      <%if(user.id == user_profile.id){%>
+          
+        <h2><%= user_profile.name%></h2>
+        <h4>You are logged in using <%= user_profile.email%></h4>
+        
+        <br>
+        <form action="/user/update-profile/<%= user_profile.id%>" method="post" enctype="multipart/form-data">
+            
+            <input type="text" name="name" placeholder="Your name " value="<%= user_profile.name%>" required>
+            <input type="email" name="email" placeholder="Your email% " value="<%= user_profile.email%>" required> 
+            <input type="file" name="avatar" placeholder="Profile picture">
+            <input type="submit" value="Update Profile">
+          
+        </form>
+      <%}else{%>
+        <h2><%= user_profile.name%></h2>
+        <h4>You are logged in using <%= user_profile.email%></h4>
+    
+      <%}%>
+
+
+
+    
+  </div>
+
+
+
