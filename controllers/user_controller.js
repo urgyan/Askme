@@ -129,3 +129,9 @@ module.exports.destroySession = function(req,res){
 }
 
 
+//Reset password form link
+module.exports.resetPasswordForm = function(req,res){
+    return res.render('resetform',{
+        title:'reset'
+    });
+}

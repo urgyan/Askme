@@ -25,12 +25,16 @@ router.post('/create-session', passport.authenticate(
 
 //create route for google auth
 router.get('/auth/google',passport.authenticate('google',{scope:['profile' , 'email']}));
-router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/user/sign-in' },),user.createSession);
-
-  
+router.get('/auth/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/user/sign-in' },
+  ),user.createSession);
 
 router.get('/sign-out',user.destroySession);
 
-
+//Forget password
+router.get('/reset-password',user.resetPasswordForm);
+router.post('/mail-accessToken',reset.sendToken);
+router.post('/reset-password-page/:id',reset.validateToken);
+router.post('/confirm-change/:id',reset.changePassword);
 
 module.exports = router;
