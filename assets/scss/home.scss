@@ -17,9 +17,64 @@
         
     }
     
-   
+    //All friends
+    #friend-list{
+        width: 30%;
+        padding: 10px;
+        border-left: 1px solid lightgrey;
+        height: inherit;
 
-    //All user of ask me 
+        h1{
+            text-align: left;
+            padding-left: 58px;
+        }
+
+        ul{
+
+          color: #855b5b;
+          height: 240px;
+          width: 50%;
+          border: 1px solid #aca5a561;
+         /* border-top: none; */
+          overflow: scroll;
+          padding: 0px;
+          margin-left: 5px;
+
+
+
+
+            li{
+
+                font-size: 10px;
+                text-align: left;
+                margin-top: 10px;
+                background-color: #ffffff;
+                color: black;
+                border-top: 1px solid gray;
+                border-bottom: none;
+                margin-top: -1px;
+                div{
+                    .add-friend{
+                        color: rgb(44, 151, 240);
+                    }
+                }
+                a{
+                    color: rgb(0, 0, 0);
+                    text-decoration: none;
+                    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+                    font-size: 1rem;
+                    
+                }
+            }
+
+
+        }
+
+
+
+    }
+
+    //All user
     #all-user{
         width: 30%;
         padding: 10px;

@@ -1,36 +1,79 @@
 #home-container {
-    display: flex;
-  }
-  
-  #home-container #feed-posts {
-    width: 40%;
-    padding: 10px;
-    margin-left: 25%;
-    height: 112vh;
-    padding: 10px;
-    margin-left: 25%;
-    overflow-y: overlay;
-  }
-  
-  #home-container ul {
-    list-style-type: none;
-  }
-  
-  
-  #home-container #all-user {
-    width: 30%;
-    padding: 10px;
-    height: inherit;
-  }
-  
-  #home-container #all-user li {
-    font-size: 20px;
-    text-align: left;
-    margin-top: 10px;
-  }
-  
-  #home-container #all-user li a {
-    color: white;
-    text-decoration: none;
-  }
-  
+  display: flex;
+}
+
+#home-container #feed-posts {
+  width: 40%;
+  padding: 10px;
+  margin-left: 25%;
+  height: 112vh;
+  padding: 10px;
+  margin-left: 25%;
+  overflow-y: overlay;
+}
+
+#home-container ul {
+  list-style-type: none;
+}
+
+#home-container #friend-list {
+  width: 30%;
+  padding: 10px;
+  border-left: 1px solid lightgrey;
+  height: inherit;
+}
+
+#home-container #friend-list h1 {
+  text-align: left;
+  padding-left: 58px;
+}
+
+#home-container #friend-list ul {
+  color: #855b5b;
+  height: 240px;
+  width: 50%;
+  border: 1px solid #aca5a561;
+  /* border-top: none; */
+  overflow: scroll;
+  padding: 0px;
+  margin-left: 5px;
+}
+
+#home-container #friend-list ul li {
+  font-size: 10px;
+  text-align: left;
+  margin-top: 10px;
+  background-color: #ffffff;
+  color: black;
+  border-top: 1px solid gray;
+  border-bottom: none;
+  margin-top: -1px;
+}
+
+#home-container #friend-list ul li div .add-friend {
+  color: #2c97f0;
+}
+
+#home-container #friend-list ul li a {
+  color: black;
+  text-decoration: none;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-size: 1rem;
+}
+
+#home-container #all-user {
+  width: 30%;
+  padding: 10px;
+  height: inherit;
+}
+
+#home-container #all-user li {
+  font-size: 20px;
+  text-align: left;
+  margin-top: 10px;
+}
+
+#home-container #all-user li a {
+  color: white;
+  text-decoration: none;
+}

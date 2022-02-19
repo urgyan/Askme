@@ -74,7 +74,7 @@
                             </i>
                         </a>
                                                     
-                            <i class="fas fa-lg fa-comments"></i>
+                            <i class="fas fa-lg fa-comments">${post.comments.length}</i>
 
                         </div>
                     </div>

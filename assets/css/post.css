@@ -99,7 +99,9 @@
     width: 100px;
 }
 
-
+.red{
+	color: rgb(9, 163, 252);
+}
 
 
 .post-comment-list{

@@ -27,7 +27,29 @@
         </div>
             
         <div class="footer1">
-
+            <%if(locals.user){%>
+                <%let obj = comment.likes.find(o =>{%>
+                    <%return o.user.toString() == user._id%>
+                <%})%>
+             
+                <% if(obj){%>
+                    <a class="toggle-like-button red" data-likes="<%= comment.likes.length%>" href="/likes/toggle/?id=<%= comment._id%>&type=Comment">
+                        <i class="fas fa-lg fa-thumbs-up">
+                            <%= comment.likes.length%>
+                        </i>
+                    </a>
+                <%}else{%>
+                    <a class="toggle-like-button red" data-likes="<%= comment.likes.length%>" href="/likes/toggle/?id=<%= comment._id%>&type=Comment">
+                        <i class="far fa-lg fa-thumbs-up">
+                            <%= comment.likes.length%>
+                        </i>
+                    </a>
+                <%}%>    
+                <%}else{%>
+                    <i class="far fa-lg fa-thumbs-up">
+                        <%= comment.likes.length%>
+                    </i>
+                <%}%>
 
         </div>
             

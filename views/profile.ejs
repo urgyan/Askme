@@ -1,5 +1,6 @@
+<link rel="stylesheet" href="<%= assetPath('css/profile.css') %>">
 
-<link rel="stylesheet" href="/css/profile.css">
+<!-- <link rel="stylesheet" href="/css/profile.css"> -->
 <div class="container">
     <div class="avatar-flip">
         <img src="<%= user_profile.avatar%>"  alt="user.name" height="150" width="150">
@@ -22,14 +23,32 @@
         </form>
       <%}else{%>
         <h2><%= user_profile.name%></h2>
-        <h4>You are logged in using <%= user_profile.email%></h4>
+        <h4> <%= user_profile.email%></h4>
     
       <%}%>
 
 
+      <%if (locals.user && user_profile.id != locals.user.id){%>
+        <% if(locals.user.friendShips.includes(user_profile.id)){%>
+          <a class="add-friend" href="/friend/add-friend/?id=<%= user_profile.id%>">
+            <button>Un Friend</button>
+          </a>
+        <%}else{%>
+          <a class="add-friend" href="/friend/add-friend/?id=<%= user_profile.id%>">
+            <button>Add Friend</button>
+          </a>
+        <%}%>
+      <%}%> 
 
     
   </div>
 
+<script src="js/profile.js"></script>
 
-
+ 
+<script>
+    $('.add-friend').each(function(){
+        let self = this;
+        let toggleFriend = new AddFriend(self);
+    });
+</script> 

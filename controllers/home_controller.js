@@ -1,3 +1,4 @@
+const FriendShip = require('../models/friendship');
 const Post = require('../models/post');
 const User = require('../models/user');
 
@@ -13,19 +14,25 @@ module.exports.home = async function(req,res){
         .populate('user')
         .populate({
             path: 'comments',
-            populate: {
-                path: 'user'
-            }
-        });
-    
-
+            populate: [
+                {
+                    path: 'user'
+                },
+                {
+                    path: 'likes'
+                }
+            ]
+        }).populate('likes')
+        
         let currUser;
         if(req.user){
             currUser =await User.findById(req.user._id)
-        
+            .populate('friendShips')
         }
 
-
+        // console.log(currUser.friendShips);
+        // currUser.friendShips.splice(0, currUser.friendShips.length);
+        // currUser.save();
         let users = await User.find({});
         
         
