@@ -1,26 +1,31 @@
 const mongoose = require('mongoose');
 
-const likeSchema = new mongoose.Schema({
+const postSchema = new mongoose.Schema({
+    content:{
+        type:String,
+        required:true
+    },
     user:{
-        type:mongoose.Schema.Types.ObjectId ,
+        type: mongoose.Schema.Types.ObjectId,
         ref:'User'
     },
-    //this defines the object id of the liked object means on which like is made post or comment
-    likeable:{
-        type:mongoose.Schema.Types.ObjectId ,
-        required:true,
-        refPath:'onModel'
-    },
-    //this field is used to define the type of liked object since it is dynamic
-    onModel:{
-        type:String,
-        required:true,
-        enum:['Post','Comment']
-    }
-
+    //Include the comment present in that post
+    comments:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref:'Comment'
+        }
+    ],
+    likes:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref:'Like'
+        }
+    ]
 },{
     timestamps:true
 });
 
-const Like = mongoose.model('Like',likeSchema);
-module.exports = Like;
+const Post = mongoose.model("Post",postSchema);
+
+module.exports = Post;
