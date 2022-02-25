@@ -1,93 +1,111 @@
 const express = require('express');
-const cookieParser = require('cookie-parser');
+const dotenv = require('dotenv');
+dotenv.config();
+const env = require('./config/environment');
 const app = express();
-const port = 8000;
+require('./config/view_helpers')(app);
+const port =  8000;
+const cookieParser = require('cookie-parser');
+
+//Importing the express layouts
 const expressLayouts = require('express-ejs-layouts');
 const db = require('./config/mongoose');
-// used for session cookie
+
+//Import express session for encryption of session cookie
 const session = require('express-session');
 const passport = require('passport');
-const passportLocal = require('./config/passport-local-strategy');
-const passportJWT = require('./config/passport-jwt-strategy');
-const passportGoogle = require('./config/passport-google-oauth2-strategy');
 
-const MongoStore = require('connect-mongo')(session);
+//Passport strategy importing
+const passportLocal = require('./config/passport-local-strategy');
+const passportJwt = require('./config/passport-jwt-strategy');
+const passportGoogleAuth = require('./config/passport-google-oauth2-strategy');
+
+//Importing the connect mongo for storing the session cookie
+const MongoStore = require('connect-mongo');
+
+//Import sass middle wear for styling
 const sassMiddleware = require('node-sass-middleware');
 const flash = require('connect-flash');
 const customMware = require('./config/middleware');
 
-// setup the chat server to be used with socket.io
+//Socket.io code
 const chatServer = require('http').Server(app);
 const chatSockets = require('./config/chat_sockets').chatSockets(chatServer);
 chatServer.listen(5000);
-console.log('chat server is listening on port 5000');
+console.log("Chat server is listening ar port 5000");
+const path = require('path');
 
 
-app.use(sassMiddleware({
-    src: './assets/scss',
-    dest: './assets/css',
-    debug: true,
-    outputStyle: 'extended',
-    prefix: '/css'
-}));
-app.use(express.urlencoded());
-
+//using scss middleware
+if(env.name == 'development'){
+    app.use(sassMiddleware({
+        src:path.join(__dirname,env.asset_path,'/scss'),
+        dest:path.join(__dirname,env.asset_path,'/css'),
+        debug:true,
+        outputStyle:'expanded',
+        prefix:'/css'
+    }));                                                    
+}
 app.use(cookieParser());
-
-app.use(express.static('./assets'));
-// make the uploads path available to the browser
-app.use('/uploads', express.static(__dirname + '/uploads'));
-
+//use the express layouts before it work with routes
 app.use(expressLayouts);
-// extract style and scripts from sub pages into the layout
-app.set('layout extractStyles', true);
-app.set('layout extractScripts', true);
+//set up static files
+app.use(express.static(env.asset_path));
+//make the upload folder used by browser
+app.use('/uploads',express.static(__dirname+'/uploads'));
+//To decoded the post request we use urlencoded
+app.use(express.urlencoded({extended:false}));
 
 
+//set up the way to handle substyle and scripts in our html file
+app.set('layout extractStyles',true);
+app.set('layout extractScripts',true);
 
+//Setup the view engine
+app.set('view engine','ejs');
+app.set('views','./views');
 
-// set up the view engine
-app.set('view engine', 'ejs');
-app.set('views', './views');
-
-// mongo store is used to store the session cookie in the db
+//mongo store is used to store the session cookie in db
 app.use(session({
-    name: 'codeial',
-    // TODO change the secret before deployment in production mode
-    secret: 'blahsomething',
+    name: 'Askme',
+    //Todo before deployment
+    secret: env.session_cookie_key,
     saveUninitialized: false,
-    resave: false,
-    cookie: {
-        maxAge: (1000 * 60 * 100)
+    resave:false,
+    cookie:{
+        maxAge: (1000*60*100)
     },
-    store: new MongoStore(
+    store: MongoStore.create(
         {
-            mongooseConnection: db,
-            autoRemove: 'disabled'
-        
-        },
-        function(err){
-            console.log(err ||  'connect-mongodb setup ok');
-        }
+        // mongooseConnection: db,
+        mongoUrl:'mongodb://localhost/askme_devlopment',
+        autoRemove: 'disabled'
+    },
+    function(err){
+        console.log(err || "Connect-mongodb setup store");
+    }
     )
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
-
 app.use(passport.setAuthenticatedUser);
 
+//app use flash
 app.use(flash());
 app.use(customMware.setFlash);
 
-// use express router
-app.use('/', require('./routes'));
+//Use express router 
+app.use('/',require('./routes'));
 
 
-app.listen(port, function(err){
-    if (err){
-        console.log(`Error in running the server: ${err}`);
+app.listen(port,(err)=>{
+
+    if(err){
+        console.log(`Error occurs on running the server: ${err}`);
+        return ;
     }
 
-    console.log(`Server is running on port: ${port}`);
+    console.log(`The server is up and running on port: ${port}`);
+    
 });
